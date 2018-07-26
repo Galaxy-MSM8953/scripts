@@ -18,7 +18,6 @@
 #  COLORS  #
 #          #
 ############
-START_TIME=$( date +%s )
 
 BLUE='\033[1;35m'
 BOLD="\033[1m"
