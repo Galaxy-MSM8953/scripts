@@ -89,7 +89,7 @@ if [ -z "$JENKINS_HOME" ]; then
     JENKINS_HOME=/var/lib/jenkins
 fi
 
-update_job_repo
+update_repo
 generate_device_list
 
 if [ "x$TARGET" == "xpromote" ]; then
