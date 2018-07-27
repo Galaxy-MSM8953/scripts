@@ -1,7 +1,9 @@
 #!/bin/bash
 
+scripts_dir=`realpath $(dirname $0)`
+
 # source common functions
-for file in `find common -name '*sh'`; do
+for file in `find $scripts_dir/common -name '*sh'`; do
     . $file
 done
 
