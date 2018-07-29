@@ -1,6 +1,7 @@
 #!/bin/bash
 
-script_dir=`realpath $(dirname $0)`
+# source 'script' functions
+. source.sh
 
 function update_repo() {
     echo "Finding git repo..."

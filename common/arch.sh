@@ -10,7 +10,8 @@ newline="
 
 function generate_device_list() {
 
-    script_dir=`realpath $(dirname $0)`
+    # source 'script' functions
+    . source.sh
 
     [ -z $script_dir ] && script_dir="job_lists"
 
