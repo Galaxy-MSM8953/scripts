@@ -29,6 +29,11 @@ if [ -z "$TRANSMISSION_USERNAME" ]; then
 	TRANSMISSION_USERNAME="transmission"
 fi
 
+
+if [ -z "$TRANSMISSION_PASSWORD" ]; then
+	TRANSMISSION_PASSWORD='Yh!27xY*tQDX14suTX$A'
+fi
+
 #acquire_build_lock
 
 for i in `find ${JENKINS_HOME}/jobs/TWRP_Builds -type f -name 'TWRP*.tar'`; do
