@@ -47,39 +47,12 @@ function remote_mkdir {
 }
 
 function copy_bootimage {
-    if [ "x$BUILD_TARGET" == "xbootimage" ] && [ "x$NO_PACK_BOOTIMAGE" == "x" ]; then
-        boot_pkg_dir=${BUILD_TEMP}/boot_pkg
-        boot_pkg_zip=${ARTIFACT_OUT_DIR}/${bimg_name}.zip
-
-        binary_target_dir=META-INF/com/google/android
-        install_target_dir=install/bin
-        img_dir=img
-        proprietary_dir=proprietary
-
+    if [ "x$BUILD_TARGET" == "xbootimage" ]; then
         # create odin package
         echoTextBlue "Creating ODIN-Flashable boot image..."
         tar -C ${ANDROID_PRODUCT_OUT}/ boot.img -c -f ${ARTIFACT_OUT_DIR}/${boot_tar_name}
 
-        # create the directories
-        exit_on_failure mkdir -p ${boot_pkg_dir}/${binary_target_dir}
-        exit_on_failure mkdir -p ${boot_pkg_dir}/${blob_dir}
-        exit_on_failure mkdir -p ${boot_pkg_dir}/${proprietary_dir}
-        exit_on_failure mkdir -p ${boot_pkg_dir}/${install_target_dir}/installbegin
-        exit_on_failure mkdir -p ${boot_pkg_dir}/${install_target_dir}/installend
-        exit_on_failure mkdir -p ${boot_pkg_dir}/${install_target_dir}/postvalidate
-
-        # copy scripts
-        cp ${script_dir}/templates/copy_variant_blobs.sh ${boot_pkg_dir}/${install_target_dir}/postvalidate/
-        cp ${script_dir}/templates/functions.sh ${boot_pkg_dir}/${install_target_dir}/
-        cp ${script_dir}/templates/run_scripts.sh ${boot_pkg_dir}/${install_target_dir}/
-        cp ${script_dir}/templates/updater-script ${boot_pkg_dir}/${binary_target_dir}/
-
-        cp ${ANDROID_PRODUCT_OUT}/boot.img ${boot_pkg_dir}/${img_dir}
-        cp ${script_dir}/updater/update-binary ${boot_pkg_dir}/${binary_target_dir}
-
-        #archive the image
-        echoTextBlue "Creating flashables..."
-        cd ${boot_pkg_dir} && zip ${boot_pkg_zip} `find ${boot_pkg_dir} -type f | cut -c $(($(echo ${boot_pkg_dir}|wc -c)+1))-`
+        cp ${ANDROID_PRODUCT_OUT}/boot.img ${ARTIFACT_OUT_DIR}/${bimg_name}.img
     fi
 }
 
